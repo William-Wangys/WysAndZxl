@@ -1,10 +1,11 @@
-﻿using DI.Enum;
+﻿using AutoMapper.Configuration.Conventions;
+using DI.Enum;
 using DI.Interface;
 using Microsoft.Extensions.Hosting.Internal;
 
 namespace DI.Service
 {
-    public class Qux: Base, IQux
+    public class Qux : Base, IQux
     {
 
     }
