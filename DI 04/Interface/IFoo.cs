@@ -10,6 +10,6 @@ namespace DI_04.Interface
 
     public interface IBaz { }
 
-    public interface IFoobar<T1, T2> { }
+    public interface IFoobar { }
 
 }

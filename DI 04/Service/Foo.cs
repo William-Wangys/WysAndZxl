@@ -5,20 +5,22 @@ using System.Text;
 
 namespace DI_04.Service
 {
-    public class Foo : Base, IFoo, IDisposable { }
-    public class Bar : Base, IBar, IDisposable { }
+    public class Foo: IFoo 
+    {
+        public IBar _bar { get; }
+
+        public Foo(IBar bar) => _bar = bar;
+    }
+    public class Bar : IBar 
+    {
+
+    }
     public class Baz : Base, IBaz, IDisposable { }
 
-    public class Foobar<T1, T2> : IFoobar<T1, T2>
+    public class Foobar : IFoobar
     {
-        public IFoo Foo { get; }
+        private Foobar() { }
 
-        public IBaz Baz { get; }
-
-        public Foobar(IFoo foo, IBaz baz)
-        {
-            Foo = foo;
-            Baz = baz;
-        }
+        public static readonly Foobar Instance = new Foobar();
     }
 }
