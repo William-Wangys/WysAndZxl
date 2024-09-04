@@ -1,0 +1,15 @@
+{
+  "format": {
+    "datetime": {
+      "longDatePattern": "dddd, MMMM d, yyyy",
+      "longTimePattern": "h:mm:ss tt",
+      "shortDatePattern": "M/d/yyyy",
+      "shortTimePattern": "h:mm tt"
+    },
+    "currencyDecimal": {
+      "digits": "2",
+      "symbol": "$"
+    }
+  }
+}
+ 

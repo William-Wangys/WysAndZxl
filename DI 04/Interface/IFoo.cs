@@ -10,6 +10,8 @@ namespace DI_04.Interface
 
     public interface IBaz { }
 
+    public interface IQux { }
+
     public interface IFoobar { }
 
 }
