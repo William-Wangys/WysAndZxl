@@ -1,0 +1,20 @@
+{
+  "foo": {
+    "gender": "Male",
+    "age": "27",
+    "contactInfo": {
+      "emailAddress": "for@outlook.com",
+      "phoneNo": "112"
+    }
+  },
+  "bar": {
+    "gender": "Female",
+    "age": "25",
+    "contactInfo": {
+      "emailAddress": "bar@outlook.com",
+      "phoneNo": "789"
+
+    }
+
+  }
+}

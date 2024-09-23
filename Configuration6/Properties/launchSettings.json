@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Configuration6": {
+      "commandName": "Project",
+      "commandLineArgs": "architecture=x64"
+    }
+  }
+}

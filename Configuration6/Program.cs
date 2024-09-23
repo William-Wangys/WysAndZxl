@@ -1,9 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Configuration.Memory;
+using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace Configuration6
@@ -530,16 +534,158 @@ namespace Configuration6
              */
             #endregion
 
-            #region 6.4.2 ConfigurationReloadToken
+            #region 6.4.2 ConfigurationReloadToken可以
             /*
                 ConfigurationRoot类型和ConfigurationSection类型的
             GetReloadToken方法返回的IChangeToken对象都是Configurat
             ionReloadToken类型
              */
             #endregion
+
+            #region 6.4.3 ConfigurationRoot
+            /*
+                下面介绍由 ConfigurationBuilder对象的 Build方法直接创建的ConfigurationRoot对象具有怎样的实现
+                
+                
+             */
             #endregion
             #endregion
+
+            #region 6.5 多样性的配置源
+            #region 6.5.1 MemoryConfigurationSource（内存）
+            /*
+                利用MemoryConfigurationSource生成配置时，我们需要将其注
+                册到IConfigurationBuilder对象之上。具体来说，我们可以像前面演
+                示的实例一样直接调用IConfigurationBuilder接口的Add方法，也可
+                以调用如下所示的两个重载的AddInMemoryCollection扩展方法
+             */
+            #endregion
+
+            #region 6.5.2 EnvironmentVariablesConfigurationSource（环境变量）
+            ///*
+            //    环境变量的提取和维护可以通过静态类型Environment来完成。
+            //    具体来说，我们可以调用它的静态方法 GetEnvironmentVariable 获
+            //    得某个指定名称的环境变量的值，而 GetEnvironment Variables 方
+            //    法则会返回所有的环境变量，EnvironmentVariableTarget 枚举类型
+            //    的参数代表环境变量作用域决定的存储位置
+            // */
+            //Environment.SetEnvironmentVariable("TEST_GENDER", "Male");
+            //Environment.SetEnvironmentVariable("TEST_AGE", "18");
+            //Environment.SetEnvironmentVariable("TEST_CONTACTINFO:EMAILADDRESS", "foobar@outlook.com");
+            //Environment.SetEnvironmentVariable("TEST_CONTACTINFO:PHONENO", "123456789");
+
+            //var profile = new ConfigurationBuilder()
+            //    .AddEnvironmentVariables("TEST_")
+            //    .Build()
+            //    .Get<Profile>();
+
+            //Debug.Assert(profile.Equals(
+            //        new Profile(Gender.Male, 18, "foobar@outlook.com", "123456789")));
+            #endregion
+
+            #region 6.5.3 CommandLineConfigurationSource(命令行)
+            ///*
+            //    在很多情况下，我们会采用 Self-Host方式将一个 ASP.NET Core
+            //应用寄宿到一个托管进程中，此时我们倾向于采用命令行的方式来启
+            //动寄宿程序。当以命令行的形式启动一个 ASP.NET Core 应用时，我
+            //们希望直接使用命名行开关（Switch）来控制应用的一些行为，所以
+            //命令行开关自然也就成了配置常用的来源之一。配置模型针对这种配
+            //置源的支持是通过CommandLineConfigurationSource 实现的，该类
+            //型定义在
+            //NuGet 包“Microsoft.Extensions.Configuration.CommandLine”中
+            //● {name}={value}.
+            //● {prefix}{name}={value}.
+            // */
+            //try
+            //{
+            //    var mapping = new Dictionary<string, string>
+            //    {
+            //        ["-a"] = "architecture",
+            //        ["-arch"] = "architecture"
+            //    };
+            //    var configuration = new ConfigurationBuilder()
+            //        .AddCommandLine(args, mapping)
+            //        .Build();
+            //    Console.WriteLine($"Architecture:{configuration["architecture"]}");
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine($"Error:{ex.Message}");
+            //}
+            #endregion
+
+            #region 6.5.4 FileConfigurationSource（文件）
+            /*
+                物理文件是我们最常用到的原始配置载体，而最佳的配置文件格
+                式主要有3种，即JSON、XML和INI，对应的配置源类型分别是
+                JsonConfigurationSource、XmlConfigurationSource和IniConfigurationSource，它们具有如下一个相同的基类FileConfigurationSource
+                1、JsonConfigurationSource
+                2、XmlConfigurationSource
+                3、InitConfigurationSource
+             */
+
+
+            var source = new FakeConfigurationSource()
+            {
+                Path = @"C:\App\appsettings.json"
+            };
+            Debug.Assert(source.FileProvider == null);
+
+            source.ResolveFileProvider();
+            var filePrivider = (PhysicalFileProvider)source.FileProvider;
+            Debug.Assert(filePrivider.Root == @"C:\App\");
+            Debug.Assert(source.Path == "appsettings.json");
+
+            #endregion
+
+            #region 6.5.5 StreamConfigurationSource
+            /*
+                StreamConfigurationSource 对象通过指定的 Stream 对象来读取
+            配置内容，所以这种配置源具有更加灵活的应用。如下面的代码片段
+            所示，StreamConfigurationSource 是一个抽象类，用于读取配置内
+            容的输出流体现在它的Stream属性中
+
+                如下面的代码片段所示，这些具体的 StreamConfigurationSource 类型通过重写的 Build 方法
+            提供对应的IConfigurationProvider对象，然后由它们利用指定的Stream对象读取对应的JSON文件、
+            XML文件和INI文本并转换成配置字典
+             */
+            #endregion
+
+            #region 6.5.6 ChainedConfigurationSource
+            //ChainedConfigurationSource
+            //ChainedConfigurationProvider
+            #endregion
+
+            #region 6.5.7 自定义ConfigurationSource
+            //var initialSettings = new Dictionary<string, string>
+            //{
+            //    ["Gender"] = "Male",
+            //    ["Age"] = "18",
+            //    ["ContactInfo:EmailAddress"] = "foobar@outlook.com",
+            //    ["ContactInfo:PhoneNo"] = "123456789"
+            //};
+
+            //var prifile = new ConfigurationBuilder()
+            //    .AddJsonFile("appSettins.json")
+            //    .Build()
+            //    .Get<Profile>();
+
+            #endregion
+
+            #endregion
+            #endregion
+
+            
             //Console.Read();
+
+
+
+        }
+
+        private class FakeConfigurationSource : FileConfigurationSource
+        {
+            public override IConfigurationProvider Build(IConfigurationBuilder builder)
+                => throw new NotImplementedException();
         }
     }
 }
