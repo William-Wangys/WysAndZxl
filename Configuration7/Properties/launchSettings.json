@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Configuration7": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "env": "Production",
+        "date": "abc"
+      }
+    }
+  }
+}

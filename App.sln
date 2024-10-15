@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration6", "Configura
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration7", "Configuration7\Configuration7.csproj", "{65622F81-BC70-4622-BE81-76551314CB7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderStateless", "OrderStateless\OrderStateless.csproj", "{5649BDFF-36C4-41B3-9A95-19405E446291}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderStateless", "OrderStateless\OrderStateless.csproj", "{5649BDFF-36C4-41B3-9A95-19405E446291}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiagnosticsLogging8", "DiagnosticsLogging8\DiagnosticsLogging8.csproj", "{5B3B4271-EA8E-4ACD-B0FB-53644FEB8CB7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{5649BDFF-36C4-41B3-9A95-19405E446291}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5649BDFF-36C4-41B3-9A95-19405E446291}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5649BDFF-36C4-41B3-9A95-19405E446291}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3B4271-EA8E-4ACD-B0FB-53644FEB8CB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3B4271-EA8E-4ACD-B0FB-53644FEB8CB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3B4271-EA8E-4ACD-B0FB-53644FEB8CB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3B4271-EA8E-4ACD-B0FB-53644FEB8CB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
